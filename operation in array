@@ -1,0 +1,155 @@
+include<iostream>
+#include<cstdlib>
+#include<ctime>
+
+
+
+void print(int b[],int size);
+
+void inserting(int b[],int size,int index,int value);
+
+void deleting(int b[],int size,int index);
+
+void update(int b[],int size,int index);
+
+void searching(int b[],int size,int value);
+
+/* functions declearing */
+
+int main()
+{
+	srand(time(0));
+	
+	int size;
+	
+	std::cout<<"Enter size of array: ";
+	std::cin>>size;
+	
+	/* declearing size of array */
+	
+	int a[size];   //declearing array
+	
+	for(int i=0;i<size;i++)   //initalaizing array
+	{
+		a[i]=rand()%100;      //add random values to the array
+	}
+	
+	char choice;
+	std::cout<<"Enter your operations: "; //p=print i=insert d=delete u=update s=search
+	std::cin>>choice;
+	
+	/* Entering first letter of operation */
+	
+	switch(choice)      //typing switch cas
+	{
+		case 'p':                          //declearing first case
+			std::cout<<"Traverse operation: ";    
+			print(a,size);
+			break;
+		case 'i':                          //declearing second case
+			int index,value;
+			
+			std::cout<<"Enter inserting index: ";
+			std::cin>>index;
+			
+			std::cout<<"Enter the inserting value: ";
+			std::cin>>value;
+			
+			std::cout<<"Insert operation: ";
+			inserting(a,size,index,value);
+			break;
+		case 'd':                        //declearing third case
+			int index1;
+			std::cout<<"Enter the removing item index: ";
+			std::cin>>index1;
+			
+			std::cout<<"Deleting operation: ";
+			deleting(a,size,index1);
+		    break;
+		case 'u':                       //declearing fourth case
+			int index2;
+			
+			std::cout<<"Enter the updating item index: ";
+			std::cin>>index2;
+			
+			std::cout<<"Update operation: ";
+			update(a,size,index2);
+			break;
+		case 's':                       //declearing fiveth case
+				int value1;
+				std::cout<<"Enter searching value: ";
+				std::cin>>value1;
+				
+				std::cout<<"Searching operations: ";
+				searching(a,size,value1);
+				break;
+		default:
+			std::cout<<"Your operatin dont find!";
+	}
+	
+	
+	return 0;
+}
+
+
+void print(int b[],int size)    //print function used print all elements of array
+{
+	for(int i=0;i<size;i++)
+	{
+		std::cout<<b[i]<<",";
+	}
+}
+
+void inserting(int b[],int size,int index,int value)     //inserting function used insert item to the array
+{
+	for(int i=size;i>=index;i--)
+	{
+		b[i+1]=b[i];
+	}
+	b[index]=value;
+	size++;
+	
+	for(int i=0;i<size;i++)
+	{
+		std::cout<<b[i]<<",";
+	}
+}
+
+void deleting(int b[],int size,int index)            //deleting function used remove item from the array
+{
+	for(int i=0;i<size;i++)
+	{
+		if(i==index)
+		{
+			continue;
+		}
+		std::cout<<b[i]<<",";
+	}
+	
+}
+
+void update(int b[],int size,int index)             //update function used update item in the array
+{
+	srand(time(NULL));
+	
+	b[index]=(rand()%200)+100;
+	
+	for(int i=0;i<size;i++)
+	{
+		std::cout<<b[i]<<",";
+	}
+}
+
+void searching(int b[],int size,int value)         //searching function used search item in the array
+{
+	int i=0;
+	while(i<size)
+	{
+		if(b[i]==value)
+		{
+			break;
+		}
+		i++;
+	}
+	std::cout<<"Your item find "<<i+1<<" position";
+}
