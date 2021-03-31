@@ -1,0 +1,40 @@
+#include<iostream>
+#include<vector>
+#include<ctime>
+
+/*declearing some important libraries*/
+
+int main()
+{
+	srand(time(0));  //time function
+	
+	int size;
+	std::cout<<"Enter size: ";   //initialaizing size of vector
+	std::cin>>size;
+	
+	std::vector <int> a;         //declearing vector on int type
+	
+	for(auto i=0;i<size;i++)      //add random values to the vector
+	{
+		a.push_back(rand()%1000);
+    }
+	
+	for(auto i:a)              //printing values of vector
+	{
+		std::cout<<i<<",";
+	}
+	
+	for(auto i=0;i<size;i++)     //removing all items from vector
+	{
+		a.pop_back();
+	}
+	
+	
+	if(a.empty()==true)         //checking vector empty or not
+	{
+		std::cout<<"\nThis vector is empty!";
+	}
+	
+
+	return 0;
+}
