@@ -1,0 +1,76 @@
+#include<iostream>
+#include<vector>
+#include<ctime>
+
+
+int main()
+{
+	srand(time(0));
+	
+	int size;
+	std::cout<<"Enter size of first vector: ";
+	std::cin>>size;
+	
+	/*declearing and intalaizing size of first vector */
+	
+	int size1;
+	std::cout<<"Enter size of second vector: ";
+	std::cin>>size1;
+	
+	/*declearing and intalaizing size of first vector */
+	
+	std::vector <int> a;
+	std::vector <int> a1;
+	
+	/*declearing two vectors */
+	
+	for(int i=0;i<size;i++)  //intalaizing first vector
+	{
+		a.push_back(rand()%100);    //add random value to the first vector
+	}
+	
+	std::cout<<"My first vector is: ";
+	
+	for(auto i:a)               //print first value
+	{
+		std::cout<<i<<",";
+	}
+	
+	std::cout<<"\nDelete process is: ";
+	
+	for(int i=0;i<size;i++)          //deleting 4th element from the vector
+	{
+		if(i==4)                     //deleting process
+		{
+			continue;                   
+		}
+		
+		std::cout<<a[i]<<",";        //printing first vector after process
+		
+	}
+	
+	std::cout<<"\nMy second vector is: ";
+	
+	for(int i=0;i<size1;i++)         //intalaizing second vector
+	{
+		a1.push_back(rand()%100);    //insert random value to vector
+		
+		std::cout<<a1[i]<<",";       //print inserting value
+	}
+	
+	std::cout<<"\n deleting second vector: ";
+	
+	for(int i=0;i<size;i++)           //deleting first 4 element from second vector
+	{
+		if(i<=3)                      //deleting process from vector
+		{
+			continue;
+		}
+		
+		std::cout<<a1[i]<<",";        //print second vector after process
+	}
+
+	
+	
+	return 0;
+}
