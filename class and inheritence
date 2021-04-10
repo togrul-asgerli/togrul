@@ -1,0 +1,47 @@
+#include<iostream>
+
+class Rectangle{
+	
+	public:
+		int length,breadth;
+		Rectangle (){};
+		Rectangle(int a,int b);
+		
+		int area()
+		{
+			return (breadth*length);
+		}
+		
+};
+
+class Square: public Rectangle{
+	
+	public:
+		int side;
+		Square(Rectangle param);
+		int area_square()
+		{
+			return(side*side);
+		}
+};
+
+Rectangle::Rectangle(int a,int b)
+{
+	length=a;
+	breadth=b;
+}
+
+Square::Square(Rectangle param)
+{
+	side=param.length;
+}
+
+int main()
+{
+	Rectangle a(10,200);
+	Square b(a);
+	
+	std::cout<<b.area_square();
+	
+	return 0;
+}
