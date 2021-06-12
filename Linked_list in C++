@@ -1,0 +1,228 @@
+#include<iostream>
+
+struct Node{
+    int data;
+    Node *next;
+};
+
+class Linked_list{
+    public: 
+       Node *head;
+      Linked_list()
+      {
+          head=NULL;
+      }
+      void insert_begin(int value)
+      {
+          Node *tmp=new Node;
+          tmp->data=value;
+          tmp->next=head;
+          head=tmp;
+      }
+      void insert_last(int value)
+      {
+          if(head==NULL)
+          {
+              head=new Node;
+              head->data=value;
+              head->next=NULL;
+          }
+          else{
+              Node *tmp=head;
+              while(tmp->next!=NULL)
+              {
+                  tmp=tmp->next;
+              }
+              tmp->next=new Node;
+              tmp=tmp->next;
+              tmp->data=value;
+              tmp->next=NULL;
+          }
+          }
+          void insert(int value,int position)
+          {
+              Node *tmp=new Node;
+              tmp->data=value;
+              tmp->next=NULL;
+              if(position==1)
+              {
+                  tmp->next=head;
+                  head=tmp;
+                  return;
+              }
+              Node *tmp1=head;
+              for(auto i=0;i<position-2;i++)
+              {
+                  tmp1=tmp1->next;
+              }
+              tmp->next=tmp1->next;
+              tmp1->next=tmp;
+          }
+          void deleting(int position)
+          {
+              Node *tmp=head;
+             if(position==1)
+             {
+                head=tmp->next;
+                delete tmp;
+                return;
+             }
+             for(auto i=0;i<position-2;i++)
+             {
+                 tmp=tmp->next;
+             }
+             Node *tmp1=tmp->next;
+             
+             tmp->next=tmp1->next;
+             delete tmp1;
+
+          }
+          void reverse_iterative()
+          {
+              Node *prev,*current,*next;
+
+              current=head;
+              prev=NULL;
+
+              while (current!=NULL)
+              {
+                next=current->next;
+                current->next=prev;
+                prev=current;
+                current=next;
+              }
+            head=prev;
+          }
+          void reverse_recursive(Node *t)
+          {
+              if(t->next==NULL)
+              {
+                  head=t;
+                  return;
+              }
+              reverse_recursive(t->next);
+              Node *q=t->next;
+              q->next=t;
+              t->next=NULL;
+          }
+          void print_iterative()
+          {
+              Node *tmp=head;
+              while(tmp!=NULL)
+              {
+                  std::cout<<tmp->data<<"\t";
+                  tmp=tmp->next;
+              }
+      }
+      void print_recursive(Node *t)
+      {
+          Node *tmp=t;
+          if(tmp==NULL)
+          {
+              return;
+          }
+          std::cout<<tmp->data<<",";
+          print_recursive(tmp->next);
+      }
+      void recursive_reverse_print(Node *t)
+      {
+          Node *tmp=t;
+          if(tmp==NULL)
+          {
+              return;
+          }
+          recursive_reverse_print(tmp->next);
+          std::cout<<tmp->data<<",";
+      }
+};
+
+int main()
+{
+    Linked_list a=Linked_list();
+
+    int number,value;
+    std::cout<<"How many number: ";
+    std::cin>>number;
+
+    for(int i=0;i<number;i++)
+    {
+        std::cout<<"Enter a value: ";
+        std::cin>>value;
+        a.insert_last(value);
+
+    }
+    std::cout<<"Your list is: ";
+    a.print_iterative();
+
+    Linked_list b=Linked_list();
+
+    b.insert(20,1);
+    b.insert(30,2);
+    b.insert(40,3);
+    
+    std::cout<<"\nSecond list: ";
+    b.print_iterative();
+
+    b.insert(50,2);
+    std::cout<<"\nAfter inserting: ";
+    b.print_iterative();
+
+    Linked_list c=Linked_list();
+
+    c.insert_begin(200);
+    c.insert_begin(300);
+    c.insert_begin(400);
+    c.insert_begin(500);
+
+    std::cout<<"\nThird list: ";
+    c.print_iterative();
+
+    c.deleting(3);
+    std::cout<<"\nAfter deleting: ";
+    c.print_iterative();
+
+    Linked_list d=Linked_list();
+
+    d.insert_last(50);
+    d.insert_last(60);
+    d.insert_last(70);
+    d.insert_last(80);
+    d.insert_last(90);
+    d.insert_last(100);
+
+    d.reverse_iterative();
+    std::cout<<"\nReverse list: ";
+    d.print_iterative();
+
+    Linked_list e=Linked_list();
+
+    e.insert_last(1000);
+    e.insert_last(2000);
+    e.insert_last(3000);
+    e.insert_last(4000);
+    e.insert_last(5000);
+    e.insert_last(6000);
+    
+
+    std::cout<<"\nPrint list using recursive method: ";
+    e.print_recursive(e.head);
+    std::cout<<"\nReversing print: ";
+    e.recursive_reverse_print(e.head);
+
+    Linked_list f=Linked_list();
+
+    for(auto i=0;i<5;i++)
+    {
+       f.insert_last(rand()%144+545);
+    }
+    std::cout<<"\nPrinting before reversing: ";
+    f.print_recursive(f.head);
+
+    std::cout<<"\nReverse recursive: ";
+    f.reverse_recursive(f.head);
+    f.print_iterative();
+
+    system("pause");
+
+    return 0;
+}
